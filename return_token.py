@@ -10,20 +10,20 @@ END = 600 # END
 ERR = 700 # ERROR
 
 #      a-z 0-9   #   " t/f spc  \n   (   ) rar   $       
-MT = [[  1,  2,  3,  4,  1,  0,  0,LRP,RRP,  7,END], # 0 -> Intial State
+MT = [[  1,  2,  3,  5,  1,  0,  0,LRP,RRP,  7,END], # 0 -> Intial State
       [  1,  7,  7,  7,  7,SYM,SYM,LRP,RRP,  7,  7], # 1 -> Symbol 
       [  7,  2,  7,  7,  7,NUM,NUM,  7,  7,  7,  7], # 2 -> Number
-      [  7,  7,  7,  4,  7,ERR,  7,  7,  7,  7,  7], # 3 -> # of Bool
+      [  7,  7,  7,  7,  4,ERR,  7,  7,  7,  7,  7], # 3 -> # of Bool
       [  7,  7,  7,  7,  7,BOO,BOO,  7,  7,  7,  7], # 4 -> t/f of Bool
       [  5,  5,  7,  6,  7,  5,  7,  7,  7,  7,  7], # 5 -> String Char
       [  7,  7,  7,  7,  7,STR,STR,LRP,RRP,  7,  7], # 6 -> Closing quotes String
-      [  7,  7,  7,  7,  7,ERR,  7,  7,  7,  7,  7]] # 7 ->   7or state
+      [  7,  7,  7,  7,  7,ERR,  7,  7,  7,  7,  7]] # 7 -> Error state
 
-      #Porque se loopea estado de error?
+      #Porque se loopea estado de error? Error solo muere hasta espacio
 
 def filter(c):
-    if ord(c) >= ord('a') and ord(c) <= ord('z'): # a-z
-        return 0
+    if c == 't' or c =='f': # true of false
+        return 4
     elif c == '0' or c == '1' or c == '2' or \
          c == '3' or c == '4' or c == '5' or \
          c == '6' or c == '7' or c == '8' or c == '9': # 0-9
@@ -32,8 +32,8 @@ def filter(c):
         return 2
     elif c == '"': # Quote
         return 3
-    elif c == 't' or c =='f': # true of false
-        return 4
+    elif ord(c) >= ord('a') and ord(c) <= ord('z'): # a-z
+        return 0
     elif c == ' ': # blank space 
         return 5
     elif c == '\n': # new line
