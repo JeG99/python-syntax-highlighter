@@ -8,17 +8,16 @@ LRP = 501  # LEFT PARENTHESIS
 RRP = 502  # RIGHT PARENTHESIS
 END = 600  # END
 ERR = 700  # ERROR
-
 #      a-z 0-9   #   " t/f spc  \n   (   ) rar   $
 MT = [[1,  2,  3,  5,  1,  0,  0, LRP, RRP,  7, END],  # 0 -> Intial State
-      [1,  7,  7,  7,  7, SYM, SYM, LRP, RRP,  7,  7],  # 1 -> Symbol
-      [7,  2,  7,  7,  7, NUM, NUM,  7,  7,  7,  7],  # 2 -> Number
+      [1,  7,  7,  7,  1, SYM, SYM, SYM, SYM,  7,  7],  # 1 -> Symbol
+      [7,  2,  7,  7,  7, NUM, NUM, NUM, NUM,  7,  7],  # 2 -> Number
       [7,  7,  7,  7,  4, ERR,  7,  7,  7,  7,  7],  # 3 -> # of Bool
       [7,  7,  7,  7,  7, BOO, BOO,  7,  7,  7,  7],  # 4 -> t/f of Bool
-      [5,  5,  7,  6,  7,  5,  7,  7,  7,  7,  7],  # 5 -> String Char
-      # 6 -> Closing quotes String
+      [5,  5,  7,  6,  5,  5,  7,  7,  7,  7,  7],  # 5 -> String Char
+      # 6 -> Closing quotes Strings
       [7,  7,  7,  7,  7, STR, STR, LRP, RRP,  7,  7],
-      [7,  7,  7,  7,  7, ERR,  7,  7,  7,  7,  7]]  # 7 -> Error state
+      [7,  7,  7,  7,  7, ERR,  7,  7,  7,  7, ERR]]  # 7 -> Error state
 
 # Porque se loopea estado de error? Error solo muere hasta espacio
 

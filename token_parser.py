@@ -3,13 +3,23 @@
 # <átomo> ::= símbolo | <constante>
 # <constante> ::= número | booleano | string
 # <lista> ::= ( <elementos> )
-# <elementos> ::= <exp> <elementos> | 
+# <elementos> ::= <exp> <elementos> | epsilon
 
 # <prog> ::= <exp> <prog> | $
 # <exp> ::= simbolo | número | booleano | string | <lista>
 # <lista> ::=
 #
 #
+
+# exp():
+# atm()
+# cons()
+
+# atm():
+# elif token == scanner.SYM:
+#         match(token)
+# const()
+
 
 import sys
 import return_token as scanner
@@ -27,41 +37,53 @@ def parser():
     global token
     token = scanner.get_token()
     prog()
-    if token == scanner.END:
-        print("Expresion bien construida")
-    else:
-        error("Expresion mal terminada")
 
 
 def prog():
-    exp()
+    if token == scanner.SYM or token == scanner.NUM or token == scanner.STR or token == scanner.BOO or token == scanner.LRP or token == scanner.RRP:
+        exp()
+        prog()
+    else:
+        if token == scanner.END:
+            print("Expresion bien construida")
+        else:
+            error("Expresion mal terminada")
 
 
 def exp():
+    if token == scanner.LRP or token == scanner.RRP:
+        print("Inside exp", token)
+        lis()
+    else:
+        atm()
+
+
+def atm():
+    if token == scanner.SYM:
+        match(token)
+    else:
+        con()
+
+
+def con():
     if token == scanner.NUM:
         match(token)
-        exp()
-    elif token == scanner.STR:
-        match(token)
-        exp()
     elif token == scanner.BOO:
         match(token)
-        exp()
-    elif token == scanner.SYM:
+    elif token == scanner.STR:
         match(token)
-        exp()
-    elif token == scanner.LRP:
-        match(token)
-        exp()
+
+
+def lis():
+    if token == scanner.LRP:
+        match(token)  # reconoce Delimitador (
+        ele()
         match(scanner.RRP)
-        exp()
 
 
-def deli():
-    match(scanner.LRP)
+def ele():
     exp()
-    match(scanner.RRP)
-    exp()
+    ele()
 
 
 def error(msg):
