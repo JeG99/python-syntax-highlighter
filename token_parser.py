@@ -55,8 +55,13 @@ def exp():
         exp()
         match(scanner.RRP)
         exp()
-    else:
-        error("Expresion mal iniciada")
+
+
+def deli():
+    match(scanner.LRP)
+    exp()
+    match(scanner.RRP)
+    exp()
 
 
 def error(msg):
