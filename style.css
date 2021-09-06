@@ -1,0 +1,23 @@
+sym {
+  color: black;
+}
+
+num {
+  color: green;
+}
+
+boo {
+  color: purple
+}
+
+str {
+  color:darkgoldenrod
+}
+
+rrp, lrp, err {
+  color: red;
+}
+
+end {
+  color: blue;
+}
