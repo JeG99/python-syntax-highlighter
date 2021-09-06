@@ -5,9 +5,7 @@
 # <lista> ::= ( <elementos> )
 # <elementos> ::= <exp> <elementos> | epsilon
 
-# <prog> ::= <exp> <prog> | $
-# <exp> ::= simbolo | número | booleano | string | <lista>
-# <lista> ::=
+
 #
 #
 
@@ -40,7 +38,7 @@ def parser():
 
 
 def prog():
-    if token == scanner.SYM or token == scanner.NUM or token == scanner.STR or token == scanner.BOO or token == scanner.LRP or token == scanner.RRP:
+    if token == scanner.SYM or token == scanner.NUM or token == scanner.STR or token == scanner.BOO or token == scanner.LRP:
         exp()
         prog()
     else:
@@ -51,7 +49,7 @@ def prog():
 
 
 def exp():
-    if token == scanner.LRP or token == scanner.RRP:
+    if token == scanner.LRP:
         print("Inside exp", token)
         lis()
     else:
@@ -72,18 +70,20 @@ def con():
         match(token)
     elif token == scanner.STR:
         match(token)
+    else:
+        error("Se esperaba una constante")
 
 
 def lis():
-    if token == scanner.LRP:
-        match(token)  # reconoce Delimitador (
-        ele()
-        match(scanner.RRP)
+    match(scanner.LRP)  # reconoce Delimitador (
+    ele()
+    match(scanner.RRP)
 
 
 def ele():
-    exp()
-    ele()
+    if token == scanner.SYM or token == scanner.NUM or token == scanner.STR or token == scanner.BOO or token == scanner.LRP:
+        exp()
+        ele()
 
 
 def error(msg):
