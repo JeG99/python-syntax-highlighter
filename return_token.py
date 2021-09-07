@@ -32,7 +32,7 @@ def filter(c, file):
     elif ord(c) >= ord('a') and ord(c) <= ord('z'):  # a-z
         return 0
     elif c == ' ':  # blank space
-        file.write(c)
+        file.write('&nbsp;')
         return 5
     elif c == '\n':  # new line
         file.write('<br>')
