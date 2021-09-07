@@ -103,5 +103,11 @@ def get_token():
         else:
             _read = False
             print("Error, not accepted word", lexeme)
+            html.close()
+            html = open('index.html', 'wb')
+            err_msg = '<!DOCTYPE html>\n<html>\n<head>\n<meta charset="utf-8">\n<link href="style.css" rel="stylesheet" type="text/css">\n</head>\n<body>\n<err>>> ERROR LÉXICO <<</err>\n</body>\n<html>'
+            html.write(err_msg.encode('utf8')) 
+            html.close()
+            sys.exit(1)
             return ERR
         html.close()

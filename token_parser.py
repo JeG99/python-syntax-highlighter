@@ -85,7 +85,9 @@ def ele():
         ele()
 
 def error(msg):
-    html = open('index.html', 'w')
-    html.write('<!DOCTYPE html>\n<html>\n<head>\n<meta charset="utf-8">\n<link href="style.css" rel="stylesheet" type="text/css">\n</head>\n<body>\n<err>ERROR: ' + msg + '</err>\n</body>\n<html>') 
+    print('ERROR:', msg)
+    html = open('index.html', 'wb')
+    err_msg = '<!DOCTYPE html>\n<html>\n<head>\n<meta charset="utf-8">\n<link href="style.css" rel="stylesheet" type="text/css">\n</head>\n<body>\n<err>>> ERROR SINTÁCTICO <<</err>\n</body>\n<html>'
+    html.write(err_msg.encode('utf8')) 
     html.close()
     sys.exit(1)
