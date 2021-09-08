@@ -39,7 +39,7 @@ def parser():
     prog()
     # abre el archivo en append mode para finalizarlo
     html = open('index.html', 'a')
-    html.write('</body>\n</html>') 
+    html.write('\n</body>\n</html>') 
     html.close()
 
 # Programa
