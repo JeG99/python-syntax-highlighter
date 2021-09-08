@@ -18,7 +18,7 @@
 # <elementos> ::= <exp> <elementos> | epsilon
 
 import sys
-import return_token as scanner
+import obten_token as scanner
 
 # empata y obtiene el token siguiente
 def match(expectedToken):
@@ -33,7 +33,7 @@ def parser():
     global token
     html = open('index.html', 'w') # abre archivo html en modo escritura (sobreescribe)
     # inserta los primeros elementos del DOM 
-    html.write('<!DOCTYPE html>\n<html>\n<head>\n<meta charset="utf-8">\n<link href="style.css" rel="stylesheet" type="text/css">\n</head>\n<body>\n')
+    html.write('<!DOCTYPE html>\n<html>\n<head>\n<meta charset="utf-8">\n<link href="resalta_sintaxis.css" rel="stylesheet" type="text/css">\n</head>\n<body>\n')
     html.close()
     token = scanner.get_token()
     prog()
